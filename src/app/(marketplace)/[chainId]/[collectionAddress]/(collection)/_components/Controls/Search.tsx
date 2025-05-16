@@ -5,12 +5,13 @@ import { useMemo } from 'react';
 
 import { cn } from '~/lib/utils';
 
-import { useFilters } from '../FilterProvider';
+import { useSidebarState } from './Sidebar/SidebarContext';
 import { IconButton, SearchIcon, SearchInput } from '@0xsequence/design-system';
+import { useFilterState } from '@0xsequence/marketplace-sdk/react';
 import { debounce } from 'radash';
 
 function CollectionSearch() {
-  const { searchBarOpen, toggleSearchBar } = useFilters();
+  const { searchBarOpen, toggleSearchBar } = useSidebarState();
 
   return (
     <>
@@ -31,7 +32,7 @@ function CollectionSearch() {
 }
 
 export function CollectionSearchInput({ className }: { className?: string }) {
-  const { setSearchText } = useFilters();
+  const { setSearchText } = useFilterState();
 
   const debouncedSearch = useMemo(
     () =>
@@ -45,16 +46,19 @@ export function CollectionSearchInput({ className }: { className?: string }) {
   );
 
   return (
-    <div className="[&>label>div>div]:w-[216px] [&>label>div>div]:h-9 [&>label>div>div]:rounded-lg [&>label>div>div]:pl-2 [&>label>div>div>input]:bg-none! [&>label>div>div>input]:h-8">
+    <div
+      className={cn(
+        '[&>label>div>div>div]:w-[216px] [&>label>div>div>div]:h-9 [&>label>div>div>div]:rounded-lg [&>label>div>div>div]:pl-2 [&>label>div>div>div>input]:bg-none! [&>label>div>div>div>input]:h-8',
+        className,
+      )}
+    >
       <SearchInput
         name="search"
         placeholder="Search name or ID"
-        className={cn(
-          'bg-background-primary border border-border-normal focus-visible:border-border-focus',
-          className,
-        )}
+        className={
+          'bg-background-primary border border-border-normal focus-visible:border-border-focus asdasdasd'
+        }
         onChange={debouncedSearch}
-        onClear={() => setSearchText('')}
       />
     </div>
   );

@@ -17,11 +17,11 @@ pnpm env-file
 ```sh
 # API key from Builder > Settings > API keys
 # https://sequence.build/project/{PROJECT_ID}/settings/apikeys
-NEXT_PUBLIC_SEQUENCE_ACCESS_KEY=""
+NEXT_PUBLIC_ACCESS_KEY=""
 
 # Project ID from Builder, found in the URL of the project
 # e.g. https://sequence.build/project/{PROJECT_ID}
-NEXT_PUBLIC_SEQUENCE_PROJECT_ID=""
+NEXT_PUBLIC_PROJECT_ID=""
 
 # Optional WalletConnect project id, for integration with WalletConnect
 NEXT_PUBLIC_WALLETCONNECT_ID=""
@@ -43,7 +43,7 @@ Run the development server:
 pnpm dev
 ```
 
-The application will be available at [http://localhost:4421](http://localhost:4421)
+The application will be available at [http://localhost:4444](http://localhost:4444)
 
 ## Production
 

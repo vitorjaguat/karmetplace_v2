@@ -11,7 +11,7 @@ export const ssrClient = async () => {
   const walletConnectProjectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_ID;
   const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 
-  if (!projectAccessKey || !walletConnectProjectId || !projectId) {
+  if (!projectAccessKey || !projectId) {
     throw new Error('Missing environment variables');
   }
 
@@ -19,9 +19,7 @@ export const ssrClient = async () => {
     cookie: headersList.get('cookie') || '',
     config: {
       projectAccessKey,
-      wallet: {
-        walletConnectProjectId,
-      },
+      walletConnectProjectId,
       projectId,
     },
     queryClient: new QueryClient(),

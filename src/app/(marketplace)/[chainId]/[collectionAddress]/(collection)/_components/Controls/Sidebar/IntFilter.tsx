@@ -9,9 +9,9 @@ import {
   AccordionTrigger,
 } from '~/components/ui/Accordion';
 
-import { useFilters } from '../../FilterProvider';
 import type { FilterProps } from './PropertyFilters';
 import { Button, cn, Text, TextInput } from '@0xsequence/design-system';
+import { useFilterState } from '@0xsequence/marketplace-sdk/react';
 import { capitalize } from 'radash';
 
 const useIntRangeFilter = (
@@ -19,7 +19,7 @@ const useIntRangeFilter = (
   filterMin?: number,
   filterMax?: number,
 ) => {
-  const { getIntFilterRange, setIntFilterValue } = useFilters();
+  const { getIntFilterRange, setIntFilterValue } = useFilterState();
   const range = getIntFilterRange(name);
   const currentMin = range?.[0];
   const currentMax = range?.[1];
@@ -134,9 +134,9 @@ export const IntFilter = ({ filter }: FilterProps) => {
           <div className="flex mt-3 w-full items-center gap-4">
             <div
               className={cn(
-                '[&>label>div>div]:h-9 [&>label>div>div]:rounded-lg [&>label>div>div]:px-2',
-                '[&>label>div>div>svg]:w-3',
-                '[&>label>div>div>input]:bg-none! [&>label>div>div>input]:py-1 [&>label>div>div>input]:h-8 [&>label>div>div>input]:text-xs',
+                '[&>label>div>div>div]:h-9 [&>label>div>div>div]:rounded-lg [&>label>div>div>div]:px-2',
+                '[&>label>div>div>div>svg]:w-3',
+                '[&>label>div>div>div>input]:bg-none! [&>label>div>div>div>input]:py-1 [&>label>div>div>div>input]:h-8 [&>label>div>div>div>input]:text-xs',
               )}
             >
               <TextInput
@@ -156,9 +156,9 @@ export const IntFilter = ({ filter }: FilterProps) => {
 
             <div
               className={cn(
-                '[&>label>div>div]:h-9 [&>label>div>div]:rounded-lg [&>label>div>div]:px-2',
-                '[&>label>div>div>svg]:w-3',
-                '[&>label>div>div>input]:bg-none! [&>label>div>div>input]:py-1 [&>label>div>div>input]:h-8 [&>label>div>div>input]:text-xs',
+                '[&>label>div>div>div]:h-9 [&>label>div>div>div]:rounded-lg [&>label>div>div>div]:px-2',
+                '[&>label>div>div>div>svg]:w-3',
+                '[&>label>div>div>div>input]:bg-none! [&>label>div>div>div>input]:py-1 [&>label>div>div>div>input]:h-8 [&>label>div>div>div>input]:text-xs',
               )}
             >
               <TextInput
