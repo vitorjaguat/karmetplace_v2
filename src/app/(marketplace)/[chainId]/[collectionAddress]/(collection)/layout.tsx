@@ -62,5 +62,3 @@ const CollectionPageLayout = async (props: {
 };
 
 export default CollectionPageLayout;
-
-export const runtime = 'edge';

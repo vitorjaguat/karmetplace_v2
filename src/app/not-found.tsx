@@ -25,5 +25,3 @@ export default async function NotFound() {
     </HTMLWrapper>
   );
 }
-
-export const runtime = 'edge';

@@ -94,5 +94,3 @@ const InventoryPage = () => {
 };
 
 export default InventoryPage;
-
-export const runtime = 'edge';

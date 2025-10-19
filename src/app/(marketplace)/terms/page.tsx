@@ -977,5 +977,3 @@ async function TermsOfUse() {
 }
 
 export default TermsOfUse;
-
-export const runtime = 'edge';

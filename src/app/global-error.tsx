@@ -156,5 +156,3 @@ export default function ErrorPage({
     </html>
   );
 }
-
-export const runtime = 'edge';

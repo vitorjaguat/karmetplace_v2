@@ -34,5 +34,3 @@ export default function CollectiblePageClient({
     </div>
   );
 }
-
-export const runtime = 'edge';

@@ -25,5 +25,3 @@ export default function Mode() {
     return <CollectibleListingsTab />;
   }
 }
-
-export const runtime = 'edge';

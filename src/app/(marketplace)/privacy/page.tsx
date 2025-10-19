@@ -760,5 +760,3 @@ async function PrivacyPolicy() {
 }
 
 export default PrivacyPolicy;
-
-export const runtime = 'edge';

@@ -56,5 +56,3 @@ const CollectionPage = () => {
 };
 
 export default CollectionPage;
-
-export const runtime = 'edge';
