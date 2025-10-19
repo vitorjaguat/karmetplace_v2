@@ -116,7 +116,6 @@ const HeaderDrawerMenu = ({
   }
 
   if (!open) return null;
-
   return (
     <Portal>
       <div

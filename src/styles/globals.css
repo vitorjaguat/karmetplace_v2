@@ -76,6 +76,7 @@
 }
 
 @theme {
+  --font-family-sans: var(--font-space-grotesk), system-ui, sans-serif;
   --color-focus-ring: hsl(254 100% 57%);
   --color-selected-highlight: hsl(247 100% 75%);
   --color-brand-primary: hsla(259, 94%, 60%, 1);

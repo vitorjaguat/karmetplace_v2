@@ -27,7 +27,7 @@ export default async function Layout({
           <link rel="shortcut icon" href={faviconUrl} />
         </>
       ) : null}
-      {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
+      {/* {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null} */}
       <HeaderDrawerProvider>
         <div className="min-h-screen bg-background-primary">
           <Header />

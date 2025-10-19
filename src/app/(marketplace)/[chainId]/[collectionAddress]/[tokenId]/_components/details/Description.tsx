@@ -1,8 +1,10 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import CustomSkeleton from '~/components/custom-skeleton/CustomSkeleton';
 
 import { Text } from '@0xsequence/design-system';
+import remarkBreaks from 'remark-breaks';
 
 type DescriptionProps = {
   description?: string;
@@ -14,6 +16,16 @@ export default function Description({
   isLoading,
 }: DescriptionProps) {
   const descriptionNotSet = !description && !isLoading;
+
+  // Debug: log the description to see what we're working with
+  console.log('Description content:', JSON.stringify(description));
+
+  // Process description to add line breaks at natural points
+  const processedDescription = description
+    ?.replace(/\*\*([^*]+)\*\*/g, '\n**$1**\n') // Add breaks around bold sections
+    // ?.replace(/\. ([A-Z])/g, '.\n\n$1') // Add breaks after sentences starting new topics
+    // ?.replace(/^\n+/, '') // Remove leading line breaks
+    ?.trim();
 
   if (isLoading) {
     return (
@@ -28,9 +40,17 @@ export default function Description({
     <div className="flex flex-col gap-3 mb-3">
       <Text className="text-xs text-muted font-medium">Description</Text>
       {!descriptionNotSet && (
-        <Text className="text-sm text-secondary font-medium">
-          {description}
-        </Text>
+        <div className="text-sm text-secondary font-medium whitespace-pre-wrap">
+          <ReactMarkdown
+            // remarkPlugins={[remarkBreaks]}
+            // components={{
+            //   p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+            //   br: () => <br />,
+            // }}
+            className="whitespace-pre-line"
+            children={description ?? ''}
+          ></ReactMarkdown>
+        </div>
       )}
       {descriptionNotSet && (
         <Text className="text-sm text-secondary font-medium">
