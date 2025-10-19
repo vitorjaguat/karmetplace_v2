@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm run format && next build",
+    "build": "next build",
+    "build:format": "pnpm run format:fix && next build",
     "dev": "next dev -p 4444",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
