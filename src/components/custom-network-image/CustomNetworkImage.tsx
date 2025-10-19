@@ -12,7 +12,8 @@ type CustomNetworkImageProps = ComponentProps<typeof OriginalNetworkImage>;
 
 const CustomNetworkImage = (props: CustomNetworkImageProps) => {
   const network = getNetwork(props.chainId);
-  const isTestnet = network.type === NetworkType.TESTNET;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+  const isTestnet = network.type ? network.type === NetworkType.TESTNET : false;
 
   return (
     <Tooltip message={network.title || network.name} disabled={!isTestnet}>

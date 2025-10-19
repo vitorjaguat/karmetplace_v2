@@ -40,16 +40,10 @@ export default function Description({
     <div className="flex flex-col gap-3 mb-3">
       <Text className="text-xs text-muted font-medium">Description</Text>
       {!descriptionNotSet && (
-        <div className="text-sm text-secondary font-medium whitespace-pre-wrap">
-          <ReactMarkdown
-            // remarkPlugins={[remarkBreaks]}
-            // components={{
-            //   p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-            //   br: () => <br />,
-            // }}
-            className="whitespace-pre-line"
-            children={description ?? ''}
-          ></ReactMarkdown>
+        <div className="text-sm text-secondary font-medium whitespace-pre-line">
+          <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+            {processedDescription || ''}
+          </ReactMarkdown>
         </div>
       )}
       {descriptionNotSet && (
