@@ -60,7 +60,7 @@ export const useNftMetadata = ({
 
     // Only fetch if we have the required parameters
     if (contractAddress && tokenId) {
-      fetchMetadata();
+      void fetchMetadata();
     }
   }, [contractAddress, tokenId]);
 
