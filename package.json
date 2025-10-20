@@ -36,6 +36,7 @@
     "@tailwindcss/postcss": "^4.1.5",
     "@tanstack/react-query": "^5.75.5",
     "@tanstack/react-query-devtools": "^5.75.5",
+    "alchemy-sdk": "^3.6.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "ethers": "^6.14.0",

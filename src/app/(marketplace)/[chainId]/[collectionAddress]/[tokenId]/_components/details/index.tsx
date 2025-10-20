@@ -1,6 +1,7 @@
 'use client';
 
 import { SocialsClient } from '~/app/(marketplace)/_layout/Header/Buttons/Socials-client';
+import useNftMetadata from '~/hooks/useNftMetadata';
 
 import Description from './Description';
 import Details from './Details';
@@ -14,6 +15,13 @@ export default function CollectibleDetailsTab() {
   const chainId = Number(params.chainId);
   const collectionAddress = params.collectionAddress as Hex;
   const tokenId = params.tokenId as string;
+  const {
+    metadata,
+    isLoading: metadataIsLoading,
+    error: metadataError,
+  } = useNftMetadata({
+    tokenId,
+  });
 
   const { data: collectible, isLoading: collectibleLoading } = useCollectible({
     chainId,
@@ -23,10 +31,12 @@ export default function CollectibleDetailsTab() {
 
   return (
     <div>
-      <Description
-        description={collectible?.description}
-        isLoading={collectibleLoading}
-      />
+      {!metadataError && metadata?.description && (
+        <Description
+          description={metadata.description}
+          isLoading={metadataIsLoading}
+        />
+      )}
 
       <SocialsClient shouldHideOnMobile={false} />
 
