@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
@@ -18,11 +20,11 @@ export default function Description({
   const descriptionNotSet = !description && !isLoading;
 
   // Debug: log the description to see what we're working with
-  console.log('Description content:', JSON.stringify(description));
+  // console.log('Description content:', JSON.stringify(description));
 
   // Process description to add line breaks at natural points
   const processedDescription = description
-    ?.replace(/\*\*([^*]+)\*\*/g, '\n**$1**\n') // Add breaks around bold sections
+    // ?.replace(/\*\*([^*]+)\*\*/g, '\n**$1**\n') // Add breaks around bold sections
     // ?.replace(/\. ([A-Z])/g, '.\n\n$1') // Add breaks after sentences starting new topics
     // ?.replace(/^\n+/, '') // Remove leading line breaks
     ?.trim();

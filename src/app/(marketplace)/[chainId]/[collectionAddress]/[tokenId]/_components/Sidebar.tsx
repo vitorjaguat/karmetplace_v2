@@ -19,13 +19,22 @@ export default function CollectibleSidebar() {
   } = useCollectableData();
 
   const is721 = collectionMetadata.data?.type === ContractType.ERC721;
+
+  // Add validation before BigInt conversion
+  const isValidTokenId = Boolean(tokenId && /^\d+$/.test(tokenId));
+  const hasValidChainId = Boolean(collectionMetadata.data?.chainId);
+
   const { data: owner } = useReadContract({
     address: collectionAddress,
     chainId: collectionMetadata.data?.chainId,
     abi: ERC721_ABI,
     functionName: 'ownerOf',
-    args: [BigInt(tokenId)],
+    args: isValidTokenId ? [BigInt(tokenId)] : undefined,
+    query: {
+      enabled: isValidTokenId && hasValidChainId && is721,
+    },
   });
+
   const isLoading =
     collectionMetadata.isLoading || collectibleMetadata.isLoading;
 

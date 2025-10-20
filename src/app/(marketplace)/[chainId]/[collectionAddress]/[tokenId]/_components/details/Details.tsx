@@ -28,37 +28,57 @@ type Details = {
 
 export default function Details() {
   const params = useParams();
-  const chainId = Number(params.chainId);
+  const chainIdParam = params.chainId as string;
   const collectionAddress = params.collectionAddress as Hex;
   const tokenId = params.tokenId as string;
 
+  // Fix validation to ensure proper boolean types
+  const chainId = Number(chainIdParam);
+  const isValidChainId = !isNaN(chainId) && chainId > 0;
+  const isValidTokenId = Boolean(tokenId && /^\d+$/.test(tokenId));
+
   const { data: collection, isLoading: collectionLoading } = useCollection({
-    chainId,
-    collectionAddress: collectionAddress,
+    chainId: isValidChainId ? chainId : 1, // fallback to mainnet
+    collectionAddress,
   });
+
   const tokenStandard = collection?.type;
-  const network = getNetwork(Number(chainId));
+
+  // Only get network if chainId is valid
+  const network = isValidChainId ? getNetwork(chainId) : null;
+
   const { data: owner, isLoading: ownerLoading } = useReadContract({
     address: collectionAddress,
-    chainId,
+    chainId: isValidChainId ? chainId : undefined,
     abi: ERC721_ABI,
     functionName: 'ownerOf',
-    args: [BigInt(tokenId)],
+    args: isValidTokenId ? [BigInt(tokenId)] : undefined,
     query: {
-      enabled: tokenStandard === ContractType.ERC721,
+      enabled: Boolean(
+        isValidChainId &&
+          isValidTokenId &&
+          tokenStandard === ContractType.ERC721,
+      ),
     },
   });
+
+  // Add early return for invalid routes
+  if (!isValidChainId) {
+    return null; // or return a 404 component
+  }
 
   const isLoading =
     collectionLoading ||
     (tokenStandard === ContractType.ERC721 && ownerLoading);
+
   const details: Details = {
     'Contract Address': collectionAddress,
     'Token ID': tokenId,
     'Token Standard': tokenStandard,
-    Blockchain: network.title,
+    Blockchain: network?.title, // Add optional chaining
   };
-  if (tokenStandard === ContractType.ERC721) {
+
+  if (tokenStandard === ContractType.ERC721 && owner) {
     details.Owner = owner;
   }
 
