@@ -16,8 +16,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={spaceGrotesk.className}>
-      <body>
-        <NuqsAdapter>{children}</NuqsAdapter>
+      <body className="relative min-h-screen">
+        <div className="site-background" aria-hidden>
+          <div className="star-container">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+        <NuqsAdapter>
+          <div className="relative z-10 flex min-h-screen flex-col">
+            {children}
+          </div>
+        </NuqsAdapter>
       </body>
     </html>
   );

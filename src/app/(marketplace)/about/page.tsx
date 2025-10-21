@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div className="min-h-screen text-neutral-100 flex flex-col justify-center items-center">
-      <div className="mt-10 p-4 md:mt-8! md:p-20! text-3xl text-center md:text-4xl w-full md:text-right">
+      <div className="mt-10 p-4 md:mt-8! md:p-20! text-3xl text-center md:text-4xl w-full md:text-right!">
         Experiment, Trade, and Collect Live Art
       </div>
       <div className="max-w-[1000px] px-4 md:px-0 flex flex-col items-center pb-20 md:pb-32">

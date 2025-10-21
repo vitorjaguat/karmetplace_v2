@@ -29,7 +29,7 @@ export default async function Layout({
       ) : null}
       {/* {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null} */}
       <HeaderDrawerProvider>
-        <div className="min-h-screen bg-background-primary">
+        <div className="min-h-screen">
           <Header />
           <HeaderDrawerMenu socials={marketplaceConfig.socials} />
 
