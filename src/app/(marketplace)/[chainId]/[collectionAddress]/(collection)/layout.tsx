@@ -35,21 +35,21 @@ const CollectionPageLayout = async (props: {
     <>
       <ScrollToTop />
 
-      <CollectionBanner
+      {/* <CollectionBanner
         bannerUrl={
           collectionConfig?.bannerUrl
             ? `${collectionConfig.bannerUrl}`
             : '/images/collection-banner-placeholder.png'
         }
-      />
+      /> */}
       <SidebarProvider>
         <div className="flex flex-col w-full lg:w-[960px]! mx-auto min-h-screen px-4 lg:px-0!">
           <CollectionHeader />
 
-          <div className="flex w-full mx-auto ">
+          <div className="flex w-full mx-auto bg-transparent!">
             <FiltersSidebar />
 
-            <div className="flex pb-7 flex-col flex-1">
+            <div className="flex pb-7 flex-col flex-1 bg-transparent!">
               {collectionConfig && <FilterBadges />}
 
               {props.children}

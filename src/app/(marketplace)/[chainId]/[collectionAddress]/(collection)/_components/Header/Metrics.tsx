@@ -57,7 +57,7 @@ const Metrics = () => {
               <CustomSkeleton />
             </div>
           ) : (
-            <Text className="text-sm text-secondary">
+            <Text className="text-sm text-secondary whitespace-nowrap">
               {listedCollectiblesCount} / {total}
             </Text>
           )}

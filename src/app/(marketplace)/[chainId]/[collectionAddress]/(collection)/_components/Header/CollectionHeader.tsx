@@ -51,17 +51,17 @@ const CollectionHeader = () => {
         {image ? <link rel="preload" as="image" href={image} /> : null}
       </Head>
       <div
-        className={'bg-background-primary flex-col w-full'}
+        className={'flex-col w-full'}
         style={{
-          position: 'sticky',
-          top: 'var(--headerHeight)',
+          // position: 'sticky',
+          // top: 'var(--headerHeight)',
           zIndex: 11,
         }}
       >
         <Grid.Root
           className={cn(
             'gap-x-4 relative items-start',
-            'px-0! md:px-2 mt-4 md:mt-5 mb-6',
+            'px-0! md:px-2 mt-4 md:mt-5 mb-6 w-full',
           )}
           template={`
   "collection-image collection-details" auto
@@ -82,14 +82,14 @@ const CollectionHeader = () => {
             )}
           </Grid.Child>
 
-          <Grid.Root className="h-full">
+          <Grid.Root className="h-full w-full">
             <Grid.Root
               template={`
       "collection-name collection-network" auto
       "collection-metrics collection-metrics" auto
       / min-content 1fr
     `}
-              className="gap-y-2"
+              className="gap-y-2 w-full"
             >
               <Grid.Child
                 name="collection-name"
@@ -100,22 +100,22 @@ const CollectionHeader = () => {
                 ) : (
                   <Text
                     className={cn(
-                      'ellipsis text-xl font-semibold text-primary',
+                      'ellipsis text-xl font-semibold text-primary whitespace-break-spaces md:whitespace-nowrap!',
                     )}
                     asChild
                   >
-                    <h1>{name}</h1>
+                    <h1 className="w-full ">{name}</h1>
                   </Text>
                 )}
               </Grid.Child>
 
               <Grid.Child
                 name="collection-network"
-                className="flex items-center"
+                className="flex items-center w-fit"
               >
                 <CustomNetworkImage size="xs" chainId={Number(chainId)} />
               </Grid.Child>
-              <Grid.Child name="collection-metrics">
+              <Grid.Child name="collection-metrics w-fit">
                 <Metrics />
               </Grid.Child>
             </Grid.Root>

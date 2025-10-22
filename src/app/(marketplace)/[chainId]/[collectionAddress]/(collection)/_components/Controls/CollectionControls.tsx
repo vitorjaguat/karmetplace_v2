@@ -29,7 +29,7 @@ export const CollectionControls = () => {
         className={cn(
           'flex items-center justify-center border-none font-medium rounded-[8px] h-9 p-2',
           filterOptions.length > 0 ? 'w-auto' : 'w-9',
-          filtersSidebarOpen && 'bg-background-control',
+          filtersSidebarOpen && 'bg-transparent',
         )}
         onClick={toggleSidebar}
         label={
@@ -47,10 +47,10 @@ export const CollectionControls = () => {
 
       <CollectionSearch />
 
-      <Text className="text-sm text-muted">
+      <Text className="text-sm text-muted bg-transparent!">
         {filteredCollectiblesCount} results
       </Text>
-      <div className="grow" />
+      <div className="grow bg-transparent!" />
     </div>
   );
 };

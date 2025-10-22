@@ -16,7 +16,7 @@ export default async function LandingPage() {
 
   return (
     <div className="relative w-full min-h-[calc(100vh-var(--headerHeight))] flex flex-col">
-      <div
+      {/* <div
         style={{
           backgroundImage: `url(${landingBannerUrl})`,
           backgroundPosition: 'center',
@@ -28,7 +28,7 @@ export default async function LandingPage() {
         <div
           className={cn('w-[278px] md:w-[420px] ', 'h-[208px] md:h-[315px]')}
         />
-      </div>
+      </div> */}
 
       <LandingPageContent collections={marketplaceConfig.collections} />
     </div>

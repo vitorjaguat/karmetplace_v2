@@ -72,13 +72,15 @@ const Filters = () => {
   const { showListedOnly, setShowListedOnly } = useFilterState();
 
   return (
-    <div className="[&>div]:before:to-transparent [&>div>div]:pr-2">
-      <Scroll className={isMD ? 'h-full pr-0 md:pr-[14px]' : 'pr-0'}>
+    <div className="[&>div]:before:to-transparent [&>div>div]:pr-2 bg-transparent!">
+      <Scroll
+        className={isMD ? 'h-full pr-0 md:pr-[14px] bg-transparent!' : 'pr-0'}
+      >
         <div
           className={'flex w-full flex-col'}
           style={{
             height: isMD
-              ? 'calc(100vh - calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight)))'
+              ? 'calc(100vh - calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight))) bg-transparent!'
               : 'auto',
           }}
         >
@@ -94,7 +96,7 @@ const Filters = () => {
               </Text>
             </div>
           ) : (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 bg-transparent!">
               <PropertyFilters
                 filters={filters}
                 isLoadingNames={isLoadingNames}

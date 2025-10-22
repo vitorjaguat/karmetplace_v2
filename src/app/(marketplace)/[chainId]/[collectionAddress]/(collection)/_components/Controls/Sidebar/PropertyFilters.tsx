@@ -46,7 +46,7 @@ export const PropertyFilters = ({
   }
 
   return (
-    <Accordion type="single" collapsible>
+    <Accordion type="single" className="bg-transparent!" collapsible>
       {filters.map((filter) => {
         switch (filter.type) {
           case PropertyType.STRING:

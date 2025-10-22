@@ -13,7 +13,7 @@ const Accordion = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Root
     ref={ref}
-    className={cn('flex w-full flex-col gap-2', className)}
+    className={cn('flex w-full flex-col gap-2 bg-transparent!', className)}
     {...props}
   />
 ));

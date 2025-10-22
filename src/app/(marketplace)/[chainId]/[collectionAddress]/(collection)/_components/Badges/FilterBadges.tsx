@@ -16,14 +16,14 @@ export const FilterBadges = () => {
   return (
     <Grid.Child
       name="collection-filter-badges"
-      className="bg-background-primary pb-3 w-full"
+      className="bg-transparent! pb-3 w-full"
       style={{
         position: 'sticky',
         zIndex: 11,
         top: 'calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight))',
       }}
     >
-      <div className="flex w-full gap-2 flex-wrap">
+      <div className="flex w-full gap-2 flex-wrap bg-transparent!">
         {filterOptions.map((filter: PropertyFilter) => {
           const filterType = getFilter(filter.name)?.type;
 
@@ -58,7 +58,7 @@ export const FilterBadges = () => {
 
         {filterOptions.length > 0 && (
           <Button
-            className="rounded-lg bg-background-secondary"
+            className="rounded-lg bg-transparent!"
             size="xs"
             variant="raised"
             onClick={clearAllFilters}

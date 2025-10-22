@@ -56,7 +56,7 @@ export function CollectionSearchInput({ className }: { className?: string }) {
         name="search"
         placeholder="Search name or ID"
         className={
-          'bg-background-primary border border-border-normal focus-visible:border-border-focus asdasdasd'
+          'border border-border-normal focus-visible:border-border-focus asdasdasd'
         }
         onChange={debouncedSearch}
       />
