@@ -1,11 +1,11 @@
-- header
+- header OK
 
-- banner image da collection
+- banner image da collection OK
 
-- footer
+- about, faq OK
 
 - homepage
 
-- coraçãozinho
+- footer
 
-- about, faq
+- coraçãozinho

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, type CSSProperties } from 'react';
 
 import CopyButton from '~/components/CopyButton';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
@@ -38,14 +38,21 @@ export const FiltersSidebar = () => {
     return <FiltersModalsForSmallScreens />;
   }
 
+  const stickyStyle: CSSProperties & Record<string, string> = {
+    top: 'calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight))',
+    maxHeight:
+      'calc(100vh - calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight)))',
+    backgroundColor: 'transparent',
+  };
+
+  stickyStyle['--seq-color-background-primary'] = 'transparent';
+  stickyStyle['--seq-color-background-secondary'] = 'transparent';
+  stickyStyle['--seq-color-background-muted'] = 'transparent';
+
   return (
     <div
-      className={'flex sticky w-[194px] mr-2.5'}
-      style={{
-        top: 'calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight))',
-        maxHeight:
-          'calc(100vh - calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight)))',
-      }}
+      className={cn('flex sticky w-[194px] mr-2.5', 'bg-transparent!')}
+      style={stickyStyle}
     >
       <Filters />
     </div>
@@ -71,16 +78,38 @@ const Filters = () => {
 
   const { showListedOnly, setShowListedOnly } = useFilterState();
 
+  const scrollStyle: (CSSProperties & Record<string, string>) | undefined = isMD
+    ? {
+        backgroundColor: 'transparent',
+        '--seq-color-background-primary': 'transparent',
+        '--seq-color-background-secondary': 'transparent',
+        '--seq-color-background-muted': 'transparent',
+      }
+    : undefined;
+
+  const containerStyle: (CSSProperties & Record<string, string>) | undefined =
+    isMD
+      ? {
+          '--seq-color-background-primary': 'transparent',
+          '--seq-color-background-secondary': 'transparent',
+          '--seq-color-background-muted': 'transparent',
+        }
+      : undefined;
+
   return (
-    <div className="[&>div]:before:to-transparent [&>div>div]:pr-2 bg-transparent!">
+    <div
+      className="[&>div]:before:to-transparent [&>div>div]:pr-2 bg-transparent!"
+      style={containerStyle}
+    >
       <Scroll
         className={isMD ? 'h-full pr-0 md:pr-[14px] bg-transparent!' : 'pr-0'}
+        style={scrollStyle}
       >
         <div
           className={'flex w-full flex-col'}
           style={{
             height: isMD
-              ? 'calc(100vh - calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight))) bg-transparent!'
+              ? 'calc(100vh - calc(var(--headerHeight) + var(--stickyCollectionHeaderHeight)))'
               : 'auto',
           }}
         >

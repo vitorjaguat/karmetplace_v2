@@ -85,9 +85,12 @@ export const StringFilter = ({ filter }: FilterProps) => {
           </Text>
         )}
         <Virtuoso
-          style={{ height: '400px' }}
+          style={{
+            height:
+              Math.min(Math.max(options.length, 1), isMD ? 8 : 6) *
+              (isMD ? 32 : 36),
+          }}
           totalCount={options.length}
-          // Add a key based on filterOptions to force re-render when filters change
           context={{ name }}
           itemContent={(index) => {
             const property = options[index];

@@ -4,7 +4,9 @@ import { createSSRClient } from '@0xsequence/marketplace-sdk/react/ssr';
 import { QueryClient } from '@tanstack/react-query';
 import { headers } from 'next/headers';
 
-export const ssrClient = async () => {
+type SSRClient = ReturnType<typeof createSSRClient>;
+
+export const ssrClient = async (): Promise<SSRClient> => {
   const headersList = await headers();
 
   const projectAccessKey = process.env.NEXT_PUBLIC_ACCESS_KEY;
