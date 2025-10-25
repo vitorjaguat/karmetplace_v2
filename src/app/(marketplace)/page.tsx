@@ -8,63 +8,68 @@ const FALLBACK_COLLECTION_ROUTE =
 const FEATURED_COLLECTION = {
   title: 'The Sphere Karmic Objects — First Cycle',
   description:
-    'The Sphere concludes its first funding cycle with KARMIC OBJECTS, a unique collection of six artworks that explore identity, ritual, and collective imagination.',
+    'The Sphere concludes its first funding cycle with KARMIC OBJECTS, a unique collection of six artworks.',
   bannerSrc: '/images/materia.jpg',
   avatarSrc: '/images/logo-sprite.png',
 };
 
 const FLOOR_PRICE_PLACEHOLDER = '—';
 
-type MarketplaceCollection = {
-  chainId: string | number;
-  address: string;
-  title?: string | null;
-};
+// type MarketplaceCollection = {
+//   chainId: string | number;
+//   address: string;
+//   title?: string | null;
+// };
 
-const getPrimaryCollection = (
-  config: unknown,
-): MarketplaceCollection | undefined => {
-  if (!config || typeof config !== 'object' || !('collections' in config)) {
-    return undefined;
-  }
+// const getPrimaryCollection = (
+//   config: unknown,
+// ): MarketplaceCollection | undefined => {
+//   if (!config || typeof config !== 'object' || !('collections' in config)) {
+//     return undefined;
+//   }
 
-  const maybeCollections: unknown = (config as { collections?: unknown })
-    .collections;
-  if (!Array.isArray(maybeCollections)) {
-    return undefined;
-  }
+//   const maybeCollections: unknown = (config as { collections?: unknown })
+//     .collections;
+//   if (!Array.isArray(maybeCollections)) {
+//     return undefined;
+//   }
 
-  for (const candidate of maybeCollections) {
-    if (!candidate || typeof candidate !== 'object') {
-      continue;
-    }
+//   for (const candidate of maybeCollections) {
+//     if (!candidate || typeof candidate !== 'object') {
+//       continue;
+//     }
 
-    const { chainId, address, title } = candidate as {
-      chainId?: unknown;
-      address?: unknown;
-      title?: unknown;
-    };
+//     const { chainId, address, title } = candidate as {
+//       chainId?: unknown;
+//       address?: unknown;
+//       title?: unknown;
+//     };
 
-    if (
-      (typeof chainId === 'string' || typeof chainId === 'number') &&
-      typeof address === 'string'
-    ) {
-      return {
-        chainId,
-        address,
-        title: typeof title === 'string' ? title : undefined,
-      };
-    }
-  }
+//     if (
+//       (typeof chainId === 'string' || typeof chainId === 'number') &&
+//       typeof address === 'string'
+//     ) {
+//       return {
+//         chainId,
+//         address,
+//         title: typeof title === 'string' ? title : undefined,
+//       };
+//     }
+//   }
 
-  return undefined;
-};
+//   return undefined;
+// };
 
 export default async function HomePage() {
   const client = await ssrClient();
   const marketplaceConfig: unknown = await client.getMarketplaceConfig();
 
-  const primaryCollection = getPrimaryCollection(marketplaceConfig);
+  // const primaryCollection = getPrimaryCollection(marketplaceConfig);
+  const primaryCollection = {
+    chainId: '1',
+    address: '0x39f7e5bdfb46bf321b8df7803070d27d79361400',
+    title: 'The Sphere Karmic Objects — First Cycle',
+  };
   const marketplaceHref = primaryCollection
     ? `/${String(primaryCollection.chainId)}/${primaryCollection.address}/items`
     : FALLBACK_COLLECTION_ROUTE;
@@ -73,7 +78,7 @@ export default async function HomePage() {
 
   return (
     <main className="relative flex min-h-screen w-full items-center justify-center">
-      <div className="container mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-20 text-center md:gap-8 md:py-28">
+      <div className="container mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-16 text-center md:gap-8 md:py-20">
         <span className="text-xs font-semibold uppercase tracking-[0.4em] text-primary">
           The Sphere | KARMETPLACE
         </span>

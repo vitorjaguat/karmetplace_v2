@@ -14,21 +14,13 @@ export const HeaderLogo = ({ logoUrl, title }: HeaderLogoProps) => {
       prefetch={false}
       href="/"
       className={
-        'hidden md:flex! items-center text-xl font-bold text-secondary'
+        'hidden md:flex! md:-ml-2! items-center text-xl font-bold text-secondary'
       }
     >
-      {/* {logoUrl ? (
-        <img
-          src={logoUrl}
-          className="h-full max-w-[200px] object-contain"
-          alt="Logo"
-        />
-      ) : (
-        <Text className="text-xl" fontWeight="bold">
-          {title}
-        </Text>
-      )} */}
-      <div id="logoAnimation" className="md:mr-7 scale-[0.3] md:scale-[0.5]">
+      <div
+        id="logoAnimation"
+        className="md:ml-0! md:pl-0! md:mr-0 lg:mr-7 scale-[0.3] md:scale-[0.5]"
+      >
         <div className="logo-animation"></div>
       </div>
     </Link>
