@@ -57,7 +57,7 @@ export const Header = async () => {
           src="/images/karmetplace_logo.png"
           width={2580}
           height={430}
-          className="max-h-full max-w-[80%] md:max-w-fit"
+          className="max-h-full max-w-full object-contain"
         />
       </div>
 
