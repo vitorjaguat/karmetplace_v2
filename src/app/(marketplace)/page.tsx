@@ -70,7 +70,7 @@ export default async function HomePage() {
     address: '0x39f7e5bdfb46bf321b8df7803070d27d79361400',
     title: 'The Sphere Karmic Objects — First Cycle',
   };
-  const marketplaceHref = primaryCollection
+  const marketplaceHref: string = primaryCollection
     ? `/${String(primaryCollection.chainId)}/${primaryCollection.address}/items`
     : FALLBACK_COLLECTION_ROUTE;
 
@@ -93,7 +93,7 @@ export default async function HomePage() {
         <Link
           prefetch
           aria-label={`Explore ${FEATURED_COLLECTION.title}`}
-          href={marketplaceHref}
+          href={marketplaceHref as `/1/${string}/items`}
           className="group relative mt-12 w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-left shadow-lg backdrop-blur-sm transition hover:border-primary/40 hover:bg-white/[0.07] md:mt-14 md:p-8"
         >
           <div className="flex flex-col gap-6 lg:flex-row! lg:items-stretch lg:gap-10">
