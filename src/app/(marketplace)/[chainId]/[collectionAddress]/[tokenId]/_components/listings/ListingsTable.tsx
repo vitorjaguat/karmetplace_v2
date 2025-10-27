@@ -75,6 +75,8 @@ const ListingsContent: React.FC<{
     );
   }
 
+  console.dir(listings, { depth: null });
+
   return (
     <OrdersTable
       orders={listings?.listings}

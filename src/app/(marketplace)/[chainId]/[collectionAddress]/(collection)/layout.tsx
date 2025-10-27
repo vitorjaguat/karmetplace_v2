@@ -43,13 +43,13 @@ const CollectionPageLayout = async (props: {
         }
       /> */}
       <SidebarProvider>
-        <div className="flex flex-col w-full lg:w-[960px]! mx-auto min-h-screen px-4 lg:px-0!">
+        <div className="flex flex-col w-full lg:w-[960px]! mx-auto min-h-screen px-4 lg:px-0! pt-6 pb-20 md:py-20!">
           <CollectionHeader />
 
           <div className="flex w-full mx-auto bg-transparent!">
             <FiltersSidebar />
 
-            <div className="flex pb-7 flex-col flex-1 bg-transparent!">
+            <div className="flex flex-col flex-1 bg-transparent!">
               {collectionConfig && <FilterBadges />}
 
               {props.children}

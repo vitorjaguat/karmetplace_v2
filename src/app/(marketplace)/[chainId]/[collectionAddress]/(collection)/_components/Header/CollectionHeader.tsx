@@ -100,7 +100,7 @@ const CollectionHeader = () => {
                 ) : (
                   <Text
                     className={cn(
-                      'ellipsis text-xl font-semibold text-primary whitespace-break-spaces md:whitespace-nowrap!',
+                      ' text-xl md:text-2xl! xl:text-3xl! font-semibold text-primary whitespace-break-spaces md:whitespace-nowrap!',
                     )}
                     asChild
                   >
@@ -113,7 +113,11 @@ const CollectionHeader = () => {
                 name="collection-network"
                 className="flex items-center w-fit"
               >
-                <CustomNetworkImage size="xs" chainId={Number(chainId)} />
+                <CustomNetworkImage
+                  className="size-4 md:size-4! xl:size-6! md:ml-2!"
+                  // size="xs"
+                  chainId={Number(chainId)}
+                />
               </Grid.Child>
               <Grid.Child name="collection-metrics w-fit">
                 <Metrics />

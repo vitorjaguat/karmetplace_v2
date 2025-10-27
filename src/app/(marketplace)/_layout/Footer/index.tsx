@@ -6,7 +6,7 @@ export const Footer = () => {
       className=" 
     z-[1] p-6 md:p-10! flex flex-col w-full items-center md:block! text-center md:text-left! bg-gray-200/10 text-neutral-100 md:mt-6"
     >
-      <div className="mb-4 md:-ml-[8px]! w-1/4">
+      <div className="mb-4 md:-ml-[8px]! w-full md:w-1/4!">
         <Image
           src="/images/karmetplace_logo.png"
           alt="The Sphere Karmetplace"

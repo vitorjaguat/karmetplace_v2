@@ -17,12 +17,10 @@ export const GridContainer = forwardRef(
       <Grid.Root
         className={cn(
           className,
-          'grid gap-2',
-          'grid-cols-2',
-          '@[550px]:grid-cols-3',
-          '@[756px]:grid-cols-4',
-          '@[800px]:grid-cols-4',
-          '@[960px]:grid-cols-5',
+          'grid gap-6 md:gap-10! xl:gap-10!',
+          'grid-cols-1',
+          'md:grid-cols-3',
+          'xl:grid-cols-3 [&>div]:justify-center! [&_div]:w-full! mx-auto!',
         )}
         ref={ref}
         {...otherProps}

@@ -195,7 +195,7 @@ export function CollectiblesGrid({
   }
 
   return (
-    <div className="@container collectibles-grid">
+    <div className="@container collectibles-grid ">
       <VirtuosoGrid
         useWindowScroll
         components={{
