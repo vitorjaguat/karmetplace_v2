@@ -16,7 +16,8 @@ export default async function CollectibleLayout({
       <div
         className={cn(
           '@container/collectibleViewContainer',
-          'flex mx-auto h-fit min-h-screen w-full max-w-[1200px] flex-col gap-12 px-2',
+          'flex mx-auto h-fit min-h-screen w-full  flex-col gap-12 px-2 max-w-none!',
+          // 'max-w-[1200px]'
         )}
       >
         <div
@@ -31,7 +32,7 @@ export default async function CollectibleLayout({
             <CollectibleSidebar />
           </div>
 
-          <div className="flex flex-col w-full md:w-[462px]! lg:w-[600px]!">
+          <div className="flex flex-col w-full md:w-[462px]! lg:w-full!">
             <CollectiblePageClient>{children}</CollectiblePageClient>
           </div>
         </div>

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "build:format": "pnpm run format:fix && next build",
-    "dev": "next dev -p 4444",
+    "dev": "next dev -p 4444 & npx next-video sync -w",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --check --ignore-path .prettierignore .",
@@ -17,7 +17,6 @@
     "env-file": "cp -n .env.example .env"
   },
   "dependencies": {
-    "0xsequence": "^2.3.12",
     "@0xsequence/api": "^2.3.12",
     "@0xsequence/checkout": "^5.3.16",
     "@0xsequence/connect": "^5.3.16",
@@ -36,6 +35,7 @@
     "@tailwindcss/postcss": "^4.1.5",
     "@tanstack/react-query": "^5.75.5",
     "@tanstack/react-query-devtools": "^5.75.5",
+    "0xsequence": "^2.3.12",
     "alchemy-sdk": "^3.6.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -43,6 +43,7 @@
     "fuse.js": "^7.1.0",
     "motion": "^12.10.0",
     "next": "^15.3.2",
+    "next-video": "^2.5.0",
     "nuqs": "^2.4.3",
     "pino-pretty": "^13.1.2",
     "radash": "^12.1.0",

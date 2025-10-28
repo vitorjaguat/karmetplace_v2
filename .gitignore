@@ -36,3 +36,11 @@ yarn-error.log*
 boilerplate_setup.log
 
 .env
+# next-video
+videos/*
+!videos/*.json
+!videos/*.js
+!videos/*.ts
+public/_next-video
+public/videos
+

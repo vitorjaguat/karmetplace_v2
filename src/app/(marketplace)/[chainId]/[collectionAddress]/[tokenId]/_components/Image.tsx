@@ -6,6 +6,8 @@ import { cn } from '~/lib/utils';
 
 import { Image } from '@0xsequence/design-system';
 import { useCollectible } from '@0xsequence/marketplace-sdk/react';
+// import Video from 'next-video';
+import Player from 'next-video/player';
 import { useParams } from 'next/navigation';
 import { type Hex } from 'viem';
 
@@ -21,6 +23,7 @@ export const CollectibleImage = () => {
     collectibleId: tokenId,
   });
   const placeholderImage = '/images/chess-tile.png';
+  console.dir(collectible, { depth: null });
 
   // Determine the source to use for rendering
   const animationUrl = collectible?.animation_url;
@@ -29,11 +32,19 @@ export const CollectibleImage = () => {
 
   if (collectibleLoading) return <CollectibleImageSkeleton />;
 
-  // Since animationUrl is ALWAYS a video, use iframe with autoplay
+  // Since animationUrl is ALWAYS a video, use next-video with remote source
   if (animationUrl) {
     return (
-      // <AnimationFrame src={animationUrl} fallbackImage={placeholderImage} />
-      <VideoPlayer src={animationUrl} fallbackImage={placeholderImage} />
+      <Player
+        src={animationUrl}
+        autoPlay
+        controls
+        loop
+        muted
+        style={{ width: '100%', height: 'auto', aspectRatio: '16/9' }}
+        className="rounded-lg"
+        playsInline
+      />
     );
   }
 
@@ -70,9 +81,9 @@ const AnimationFrame = ({
   }, [src]);
 
   return (
-    <div className="w-full align-center flex justify-center bg-background-control/30 rounded-lg relative aspect-video">
+    <div className="w-full bg-background-control/30 rounded-lg relative aspect-video overflow-hidden max-w-full">
       {isLoading && (
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 flex items-center justify-center">
           <CollectibleImageSkeleton />
         </div>
       )}
@@ -88,14 +99,20 @@ const AnimationFrame = ({
       <iframe
         title="Arweave video content"
         className={cn(
-          'aspect-video w-full rounded-lg',
+          'w-full h-full max-w-full',
           isLoading && 'opacity-0',
           hasError && 'hidden',
         )}
         src={autoplaySrc}
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
         sandbox="allow-scripts allow-same-origin allow-presentation"
-        style={{ border: '0px' }}
+        allowFullScreen
+        style={{
+          border: '0px',
+          width: '100%',
+          height: '100%',
+          display: 'block',
+        }}
         onLoad={() => setIsLoading(false)}
         onError={() => {
           setIsLoading(false);
@@ -118,7 +135,7 @@ const VideoPlayer = ({
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="w-full align-center flex justify-center bg-background-control/30 rounded-lg relative aspect-video">
+    <div className="w-full align-center flex justify-center bg-background-control/30 relative aspect-video">
       {isLoading && (
         <div className="absolute inset-0">
           <CollectibleImageSkeleton />
@@ -134,30 +151,32 @@ const VideoPlayer = ({
         </div>
       )}
       <video
-        className={cn(
-          'aspect-video w-full rounded-lg',
-          isLoading && 'opacity-0',
-          hasError && 'hidden',
-        )}
+        // className={cn('w-full', isLoading && 'opacity-0', hasError && 'hidden')}
+        className="w-full"
         autoPlay
-        loop
+        // preload="none"
+        // loop
         controls
         playsInline
-        muted
+        width="250"
+        height="90"
+        // controlsList="play"
+        // muted
+        poster="/images/materia.jpg"
         onLoadedData={() => setIsLoading(false)}
-        onError={() => {
-          setIsLoading(false);
-          setHasError(true);
-        }}
+        // onError={() => {
+        //   setIsLoading(false);
+        //   setHasError(true);
+        // }}
       >
-        <source src={src} />
+        <source src={src} type="video/mp4" />
       </video>
     </div>
   );
 };
 
 function CollectibleImageSkeleton() {
-  return <div className="aspect-square w-full h-full loading rounded-lg" />;
+  return <div className="aspect-video w-full h-full loading rounded-lg" />;
 }
 
 // 'use client';

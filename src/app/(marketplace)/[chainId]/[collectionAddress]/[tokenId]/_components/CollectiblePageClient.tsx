@@ -17,7 +17,7 @@ export default function CollectiblePageClient({
       className={cn(
         'flex flex-col',
         'gap-4 @xl/collectibleViewContainer:gap-10!',
-        'pb-0 @xl/collectibleViewContainer:pb-[90px]!',
+        'pb-0 @xl/collectibleViewContainer:pb-[90px]! w-full! max-w-none!',
       )}
     >
       <div className="block md:hidden!">
