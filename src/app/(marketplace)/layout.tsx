@@ -14,7 +14,7 @@ export default async function Layout({
   const { getInitialState, config, getMarketplaceConfig } = await ssrClient();
   const initialState = await getInitialState();
   const marketplaceConfig = await getMarketplaceConfig();
-  const { fontUrl, faviconUrl } = marketplaceConfig;
+  const { faviconUrl } = marketplaceConfig;
   return (
     <Providers
       sdkInitialState={initialState}

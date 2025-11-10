@@ -7,6 +7,7 @@ import {
   usePagination,
 } from '../pagination/PaginationContext';
 import { Text } from '@0xsequence/design-system';
+import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import {
   useCountListingsForCollectible,
   useListListingsForCollectible,
@@ -47,7 +48,12 @@ const ListingsContent: React.FC<{
         page: page.page,
         pageSize: page.pageSize,
       },
+      filter: {
+        marketplace: [MarketplaceKind.sequence_marketplace_v2],
+      },
     });
+
+  // console.dir(listings, { depth: null });
 
   useEffect(() => {
     if (
@@ -63,6 +69,9 @@ const ListingsContent: React.FC<{
       collectionAddress,
       chainId,
       collectibleId: tokenId,
+      filter: {
+        marketplace: [MarketplaceKind.sequence_marketplace_v2],
+      },
     });
 
   if (!listings?.listings.length && !listingsLoading) {

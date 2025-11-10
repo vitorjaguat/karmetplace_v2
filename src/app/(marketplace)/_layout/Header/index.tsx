@@ -5,7 +5,7 @@ import { cn } from '~/lib/utils';
 
 import { InventoryButton } from './Buttons/InventoryButton';
 import MenuButton from './Buttons/MenuButton';
-import { Socials } from './Buttons/Socials';
+// import { Socials } from './Buttons/Socials';
 import { WalletButton } from './Buttons/WalletButton';
 import { HeaderLogo } from './HeaderLogo';
 import { headers } from 'next/headers';

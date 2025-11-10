@@ -1,6 +1,6 @@
 'use client';
 
-import { Text } from '@0xsequence/design-system';
+// import { Text } from '@0xsequence/design-system';
 import Link from 'next/link';
 
 type HeaderLogoProps = {

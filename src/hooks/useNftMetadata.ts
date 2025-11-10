@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import contract from '../lib/contract';
-import { Alchemy, Network, type Nft } from 'alchemy-sdk';
+import { type Nft } from 'alchemy-sdk';
 
 interface UseNftMetadataParams {
   contractAddress?: string;
@@ -35,19 +35,16 @@ export const useNftMetadata = ({
           throw new Error('Contract address and token ID are required');
         }
 
-        // Initialize Alchemy SDK for ETH mainnet
-        const alchemy = new Alchemy({
-          apiKey: process.env.ALCHEMY_API_KEY || '',
-          network: Network.ETH_MAINNET,
-        });
-
-        // Fetch NFT metadata
-        const nftMetadata = await alchemy.nft.getNftMetadata(
-          contractAddress,
-          tokenId,
+        const response = await fetch(
+          `/api/nft/metadata?contractAddress=${contractAddress}&tokenId=${tokenId}&chainId=1`,
         );
 
-        setMetadata(nftMetadata);
+        if (!response.ok) {
+          throw new Error('Failed to fetch NFT metadata');
+        }
+
+        const data = await response.json();
+        setMetadata(data.metadata);
       } catch (err) {
         console.error('Error fetching NFT metadata:', err);
         setError(

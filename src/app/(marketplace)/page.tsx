@@ -1,4 +1,6 @@
-import { ssrClient } from '../marketplace-sdk/ssr';
+// import { ssrClient } from '../marketplace-sdk/ssr';
+import { FloorPriceDisplay } from '~/components/FloorPriceDisplay';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,8 +14,6 @@ const FEATURED_COLLECTION = {
   bannerSrc: '/images/materia.jpg',
   avatarSrc: '/images/logo-sprite.png',
 };
-
-const FLOOR_PRICE_PLACEHOLDER = '—';
 
 // type MarketplaceCollection = {
 //   chainId: string | number;
@@ -61,8 +61,8 @@ const FLOOR_PRICE_PLACEHOLDER = '—';
 // };
 
 export default async function HomePage() {
-  const client = await ssrClient();
-  const marketplaceConfig: unknown = await client.getMarketplaceConfig();
+  // const client = await ssrClient();
+  // const marketplaceConfig: unknown = await client.getMarketplaceConfig();
 
   // const primaryCollection = getPrimaryCollection(marketplaceConfig);
   const primaryCollection = {
@@ -74,10 +74,10 @@ export default async function HomePage() {
     ? `/${String(primaryCollection.chainId)}/${primaryCollection.address}/items`
     : FALLBACK_COLLECTION_ROUTE;
 
-  const marketplaceLabel = primaryCollection?.title ?? 'Explore collection';
+  // const marketplaceLabel = primaryCollection?.title ?? 'Explore collection';
 
   return (
-    <main className="relative flex min-h-screen w-full items-center justify-center">
+    <main className="relative flex min-h-[calc(100vh-calc(--headerHeight))] w-full items-center justify-center">
       <div className="container mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-16 text-center md:gap-8 md:py-20">
         <span className="text-xs font-semibold uppercase tracking-[0.4em] text-primary">
           The Sphere | KARMETPLACE
@@ -131,14 +131,10 @@ export default async function HomePage() {
                 </p>
               </div>
               <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                <div className="w-full">
-                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-400">
-                    Floor price
-                  </span>
-                  <span className="mt-2 block text-2xl font-semibold text-neutral-100">
-                    {FLOOR_PRICE_PLACEHOLDER}
-                  </span>
-                </div>
+                <FloorPriceDisplay
+                  contractAddress={primaryCollection.address}
+                  chainId={Number(primaryCollection.chainId)}
+                />
                 <span className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-black transition group-hover:bg-primary/80 md:px-6 md:py-3 md:text-base">
                   Explore collection
                 </span>

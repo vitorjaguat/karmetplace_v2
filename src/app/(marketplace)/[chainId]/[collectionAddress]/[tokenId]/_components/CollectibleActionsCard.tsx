@@ -11,6 +11,7 @@ import {
   compareAddress,
   ContractType,
   formatPrice,
+  MarketplaceKind,
   type Order,
 } from '@0xsequence/marketplace-sdk';
 import {
@@ -53,6 +54,9 @@ export const CollectibleActionsCard = ({
       chainId,
       collectionAddress,
       tokenId,
+      filter: {
+        marketplace: [MarketplaceKind.sequence_marketplace_v2],
+      },
     });
   const { data: listings, isLoading: listingsLoading } =
     useListListingsForCollectible({

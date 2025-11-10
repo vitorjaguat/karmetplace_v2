@@ -96,6 +96,22 @@
   }
 }
 
+/* video */
+media-controller,
+media-controller * {
+  --media-primary-color: #ff4d6d; /* general accent */
+  --media-range-bar-color: #ff4d6d; /* watched portion */
+  --media-range-track-background: rgba(255, 77, 109, 0.25); /* base rail */
+  --media-time-range-buffered-color: rgba(
+    255,
+    77,
+    109,
+    0.35
+  ); /* buffered-but-not-played */
+  --media-range-thumb-background: #ff4d6d; /* handle */
+  --media-range-thumb-box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.15);
+}
+
 /* UTILITIES TODO: Replace it with Skeleton from design-system */
 @utility loading {
   @apply bg-secondary/10 animate-pulse rounded-sm text-transparent select-none;

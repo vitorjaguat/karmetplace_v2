@@ -10,9 +10,9 @@ export default async function LandingPage() {
     s.getMarketplaceConfig(),
   );
 
-  const landingBannerUrl =
-    marketplaceConfig.landingBannerUrl ||
-    '/images/landing-banner-placeholder.png';
+  // const landingBannerUrl =
+  //   marketplaceConfig.landingBannerUrl ||
+  //   '/images/landing-banner-placeholder.png';
 
   return (
     <div className="relative w-full min-h-[calc(100vh-var(--headerHeight))] flex flex-col">

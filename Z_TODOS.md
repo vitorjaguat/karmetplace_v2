@@ -8,7 +8,12 @@
 
 - footer OK
 
-- media display: h-fit
+- media display: h-fit OK
+
+- media player: escolher entre o theme atual ou um theme parecido com youtube ou vimeo: https://player.style/themes/yt?framework=react
+- linha verde: /Users/vitorbutkusaguiar/repos/karmetplace_v2/src/app/(marketplace)/[chainId]/[collectionAddress]/[tokenId]/\_components/Image.tsx
+
+* globals
 
 - coraçãozinho
 
@@ -16,4 +21,4 @@
 
 - testar fazer listing novo (e aceitar)
 
-- créditos nos Details: quebra de linha única
+- créditos nos Details: quebra de linha única OK

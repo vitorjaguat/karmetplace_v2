@@ -2,7 +2,7 @@ import { ssrClient } from '~/app/marketplace-sdk/ssr';
 import ScrollToTop from '~/components/ScrollToTop';
 
 import { FilterBadges } from './_components/Badges';
-import CollectionBanner from './_components/Banner';
+// import CollectionBanner from './_components/Banner';
 import { FiltersSidebar } from './_components/Controls/Sidebar/FiltersSidebar';
 import { SidebarProvider } from './_components/Controls/Sidebar/SidebarContext';
 import CollectionHeader from './_components/Header/CollectionHeader';
