@@ -1,9 +1,5 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-
-import { cn } from '~/lib/utils';
-
 import { Image } from '@0xsequence/design-system';
 import { useCollectible } from '@0xsequence/marketplace-sdk/react';
 // import Video from 'next-video';

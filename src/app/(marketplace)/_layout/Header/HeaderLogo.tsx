@@ -8,7 +8,10 @@ type HeaderLogoProps = {
   title?: string;
 };
 
-export const HeaderLogo = ({ logoUrl, title }: HeaderLogoProps) => {
+export const HeaderLogo = ({
+  logoUrl: _logoUrl,
+  title: _title,
+}: HeaderLogoProps) => {
   return (
     <Link
       prefetch={false}

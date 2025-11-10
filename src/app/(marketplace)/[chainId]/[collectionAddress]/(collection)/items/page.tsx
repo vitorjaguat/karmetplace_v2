@@ -8,7 +8,11 @@ import ErrorFetchingCollectibles from '../_components/ErrorFetchingCollectibles'
 import NoItemsFound from '../_components/NoItemsFound';
 import { useListCollectiblesArgs } from '../_hooks/useListCollectiblesArgs';
 import { Spinner } from '@0xsequence/design-system';
-import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
+import {
+  MarketplaceKind,
+  type CollectibleOrder,
+  type Order,
+} from '@0xsequence/marketplace-sdk';
 import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { useLowestListing } from '@0xsequence/marketplace-sdk/react/hooks';
 import { useParams } from 'next/navigation';
@@ -21,10 +25,10 @@ const CollectibleWithLowestListing = ({
   collectionAddress,
   onListingFetched,
 }: {
-  collectible: any;
+  collectible: CollectibleOrder;
   chainId: number;
   collectionAddress: Hex;
-  onListingFetched: (tokenId: string, listing: any | null) => void;
+  onListingFetched: (tokenId: string, listing: Order | null) => void;
 }) => {
   const { data: lowestListing, isLoading: lowestListingLoading } =
     useLowestListing({
@@ -66,12 +70,12 @@ const CollectionPage = () => {
 
   // State to store lowest listings for each token (null means no listing, undefined means not fetched yet)
   const [lowestListings, setLowestListings] = useState<
-    Record<string, any | null>
+    Record<string, Order | null>
   >({});
 
   // Callback to update lowest listings
   const handleListingFetched = useCallback(
-    (tokenId: string, listing: any | null) => {
+    (tokenId: string, listing: Order | null) => {
       setLowestListings((prev) => ({
         ...prev,
         [tokenId]: listing,
@@ -80,8 +84,10 @@ const CollectionPage = () => {
     [],
   );
 
-  const baseCollectiblesList =
-    collectiblesList?.pages.flatMap((p) => p.collectibles) ?? [];
+  const baseCollectiblesList = useMemo(
+    () => collectiblesList?.pages.flatMap((p) => p.collectibles) ?? [],
+    [collectiblesList],
+  );
 
   // Map collectibles with their lowest listings from sequence marketplace only
   const collectiblesListMapped = useMemo(() => {
@@ -92,7 +98,7 @@ const CollectionPage = () => {
       return {
         ...collectible,
         listing: hasLowestListingData
-          ? lowestListings[tokenId]
+          ? (lowestListings[tokenId] ?? undefined)
           : collectible.listing,
       };
     });

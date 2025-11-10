@@ -74,7 +74,10 @@ export const useCollectionFloorPrice = ({
   });
 
   // Collect all token queries
-  const tokenQueries = [token1, token2, token3, token4, token5, token6];
+  const tokenQueries = useMemo(
+    () => [token1, token2, token3, token4, token5, token6],
+    [token1, token2, token3, token4, token5, token6],
+  );
 
   // Check if any queries are still loading
   const isLoading =
@@ -82,7 +85,7 @@ export const useCollectionFloorPrice = ({
 
   // Check for errors
   const error =
-    tokenQueries.find((query) => query.error)?.error || currenciesError;
+    tokenQueries.find((query) => query.error)?.error ?? currenciesError;
 
   // Calculate the floor price from all listings
   const floorPrice = useMemo(() => {
@@ -95,7 +98,7 @@ export const useCollectionFloorPrice = ({
       .map((query) => query.data)
       .filter(
         (listing): listing is NonNullable<typeof listing> =>
-          listing != null && listing.priceAmount != null,
+          listing?.priceAmount != null,
       )
       .map((listing) => ({
         priceAmount: BigInt(listing.priceAmount),
@@ -126,7 +129,7 @@ export const useCollectionFloorPrice = ({
       currency.decimals,
     );
     return `${formattedPrice} ${currency.symbol}`;
-  }, [currencies, isLoading, error, ...tokenQueries.map((q) => q.data)]);
+  }, [currencies, isLoading, error, tokenQueries]);
 
   return {
     floorPrice,

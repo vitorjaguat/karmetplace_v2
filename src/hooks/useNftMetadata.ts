@@ -43,7 +43,7 @@ export const useNftMetadata = ({
           throw new Error('Failed to fetch NFT metadata');
         }
 
-        const data = await response.json();
+        const data = (await response.json()) as { metadata: Nft };
         setMetadata(data.metadata);
       } catch (err) {
         console.error('Error fetching NFT metadata:', err);

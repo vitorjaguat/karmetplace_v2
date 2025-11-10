@@ -19,7 +19,7 @@ export const getAlchemyNetwork = (chainId: number): Network => {
   }
 };
 
-export const createAlchemy = (chainId: number = 1): Alchemy => {
+export const createAlchemy = (chainId = 1): Alchemy => {
   // Use server-side environment variable (no NEXT_PUBLIC_ prefix)
   const apiKey =
     process.env.ALCHEMY_API_KEY ||
