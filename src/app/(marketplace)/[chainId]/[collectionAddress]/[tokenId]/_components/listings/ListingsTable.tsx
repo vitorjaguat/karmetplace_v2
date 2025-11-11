@@ -84,7 +84,7 @@ const ListingsContent: React.FC<{
     );
   }
 
-  console.dir(listings, { depth: null });
+  // console.dir(listings, { depth: null });
 
   return (
     <OrdersTable

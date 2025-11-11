@@ -13,8 +13,16 @@ export const WalletButton = () => {
   }
 
   if (isConnected) {
-    return <AccountButton />;
+    return <AccountButton className="font-family-sans" />;
   }
 
-  return <ConnectButton size="sm" showIcon shape="square" responsive={true} />;
+  return (
+    <ConnectButton
+      className="font-family-sans"
+      size="sm"
+      showIcon
+      shape="square"
+      responsive={true}
+    />
+  );
 };

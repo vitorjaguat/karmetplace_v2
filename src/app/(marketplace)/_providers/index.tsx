@@ -39,6 +39,7 @@ export default function Providers({
   marketplaceConfig: MarketplaceConfig;
   children: React.ReactNode;
 }) {
+  console.dir(marketplaceConfig, { depth: null });
   const [wagmiConfig] = useState(
     createWagmiConfig(marketplaceConfig, sdkConfig, !!sdkInitialState),
   );
@@ -56,6 +57,9 @@ export default function Providers({
       projectName: marketplaceConfig.title,
       descriptiveSocials: showDescriptiveSocials,
     },
+    hideSocialConnectOptions: true,
+    customCSS: `[id^="radix-"] > div > div.flex.mt-6.gap-6.flex-col { display: none !important; }
+      [id^="radix-"] > div > div.flex.gap-2.flex-row.justify-center.items-center.mt-6 > div:nth-child(2) { display: none !important; }`,
   } satisfies ConnectConfig;
 
   return (

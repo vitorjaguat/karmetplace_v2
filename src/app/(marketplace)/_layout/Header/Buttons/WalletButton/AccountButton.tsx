@@ -70,13 +70,13 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
           onClick={() => setIsOpen(!isOpen)}
           label={
             props.children ?? (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 font-family-sans">
                 <GradientAvatar
                   address={address?.toLowerCase() ?? ''}
                   size="sm"
                 />
 
-                <div className="hidden md:block! text-primary">
+                <div className="hidden md:block! text-primary font-family-sans">
                   <ENSName address={address} truncateAt={4} />
                 </div>
               </div>
@@ -93,10 +93,10 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         }}
         collisionPadding={16}
         onInteractOutside={() => setIsOpen(false)}
-        className="rounded-[8px] mt-4 md:mt-[3px] bg-background-raised"
+        className="rounded-[8px] mt-4 md:mt-[3px] bg-background-raised font-family-sans"
       >
         <DropdownButton
-          className="w-full bg-background-control hover:bg-background-control/80"
+          className="w-full bg-transparent hover:bg-background-control/80 font-family-sans"
           leftIcon={CopyIcon}
           onClick={handleCopyAddress}
           label="Copy address"
@@ -105,7 +105,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         />
 
         <DropdownButton
-          className="w-full bg-background-control hover:bg-background-control/80"
+          className="w-full bg-transparent hover:bg-background-control/80 font-family-sans"
           leftIcon={GridIcon}
           onClick={() => router.push('/inventory')}
           label="View inventory"
@@ -114,7 +114,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         />
 
         <DropdownButton
-          className="w-full bg-background-control hover:bg-background-control/80"
+          className="w-full bg-transparent hover:bg-background-control/80 font-family-sans"
           leftIcon={WalletIcon}
           onClick={() => openWallet()}
           label="Open wallet"
@@ -123,7 +123,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         />
 
         <DropdownButton
-          className="w-full bg-background-control hover:bg-background-control/80"
+          className="w-full bg-transparent hover:bg-background-control/80 font-family-sans"
           leftIcon={SignoutIcon}
           onClick={() => disconnect()}
           label="Sign out"

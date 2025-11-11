@@ -45,7 +45,7 @@ export default function ConnectButton(props: ConnectButtonProps) {
   return (
     <Button
       variant={props.variant || 'raised'}
-      className={cn(props.className)}
+      className={cn('font-sans', props.className)}
       {...buttonProps}
       onClick={handleOnClick}
       label={label}

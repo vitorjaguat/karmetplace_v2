@@ -13,7 +13,7 @@ const ConnectWalletPrompt = () => (
   >
     <SvgGridOutlineIcon className="w-7 h-7 text-muted" />
 
-    <Text className="text-sm text-muted font-bold">
+    <Text className="text-sm text-muted font-bold font-family-sans">
       Sign in to view your inventory
     </Text>
 
