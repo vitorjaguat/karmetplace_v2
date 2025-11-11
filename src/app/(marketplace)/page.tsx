@@ -100,7 +100,7 @@ export default async function HomePage() {
             <div className="flex-1 relative overflow-hidden rounded-2xl bg-black/20 lg:max-w-[48%]">
               <div className="relative h-72 w-full lg:h-[420px]">
                 <video
-                  src="/videos/kartmetplace_intro_v3.mp4"
+                  src="/videos/karmetplace_intro_v3.mp4"
                   autoPlay
                   muted
                   loop
