@@ -99,16 +99,15 @@ export default async function HomePage() {
           <div className="flex flex-col gap-6 lg:flex-row! lg:items-stretch lg:gap-10">
             <div className="flex-1 relative overflow-hidden rounded-2xl bg-black/20 lg:max-w-[48%]">
               <div className="relative h-72 w-full lg:h-[420px]">
-                <Image
-                  src={FEATURED_COLLECTION.bannerSrc}
-                  alt="Featured collection banner"
-                  fill
-                  priority
-                  sizes="(min-width: 1280px) 600px, (min-width: 1024px) 55vw, 100vw"
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                <video
+                  src="/videos/kartmetplace_intro_v3.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  className="h-full w-full object-cover aspect-video transition duration-500 group-hover:scale-[1.03]"
                 />
               </div>
-              <div className="absolute bottom-6 left-6 hidden h-20 w-20 overflow-hidden rounded-xl border border-white/40 bg-black/40 shadow-xl md:block">
+              {/* <div className="absolute bottom-6 left-6 hidden h-20 w-20 overflow-hidden rounded-xl border border-white/40 bg-black/40 shadow-xl md:block">
                 <Image
                   src={FEATURED_COLLECTION.avatarSrc}
                   alt="Featured collection avatar"
@@ -116,7 +115,7 @@ export default async function HomePage() {
                   sizes="80px"
                   className="object-cover"
                 />
-              </div>
+              </div> */}
             </div>
             <div className="flex flex-1 flex-col justify-between gap-6">
               <div className="space-y-4">
