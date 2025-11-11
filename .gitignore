@@ -43,5 +43,5 @@ videos/*
 !videos/*.ts
 public/_next-video
 
-public/videos
+
 
