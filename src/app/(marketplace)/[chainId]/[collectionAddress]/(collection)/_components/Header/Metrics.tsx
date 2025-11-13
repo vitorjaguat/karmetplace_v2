@@ -3,14 +3,11 @@
 import CustomSkeleton from '~/components/custom-skeleton/CustomSkeleton';
 import { Grid } from '~/components/ui';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
+import { useCollectionFloorPrice } from '~/hooks/useCollectionFloorPrice';
 
-import { Image, Text } from '@0xsequence/design-system';
-import { formatPrice, OrderSide } from '@0xsequence/marketplace-sdk';
-import {
-  useCountOfCollectables,
-  useCurrencies,
-  useFloorOrder,
-} from '@0xsequence/marketplace-sdk/react/hooks';
+import { Text } from '@0xsequence/design-system';
+import { OrderSide } from '@0xsequence/marketplace-sdk';
+import { useCountOfCollectables } from '@0xsequence/marketplace-sdk/react/hooks';
 import { useParams } from 'next/navigation';
 import type { Hex } from 'viem';
 
@@ -74,20 +71,12 @@ const FloorPriceMetric = () => {
   const chainId = Number(params.chainId);
   const collectionAddress = params.collectionAddress as Hex;
 
-  const { isLoading: isFloorLoading, data: floor } = useFloorOrder({
-    chainId,
-    collectionAddress,
-  });
-
-  const { isLoading: isCurrenciesLoading, data: currencies } = useCurrencies({
+  const { floorPrice, isLoading: isFloorLoading } = useCollectionFloorPrice({
+    contractAddress: collectionAddress,
     chainId,
   });
 
-  const floorCurrency = currencies?.find(
-    (currency) =>
-      currency.contractAddress === floor?.order?.priceCurrencyAddress,
-  );
-  if (isFloorLoading || isCurrenciesLoading) {
+  if (isFloorLoading) {
     return (
       <div className="flex w-16">
         <CustomSkeleton />
@@ -95,9 +84,9 @@ const FloorPriceMetric = () => {
     );
   }
 
-  if (!floor || !floorCurrency) {
-    return null;
-  }
+  // if (!floorPrice) {
+  //   return null;
+  // }
 
   return (
     <Grid.Child
@@ -106,29 +95,7 @@ const FloorPriceMetric = () => {
     >
       <Text className="text-sm text-muted">Floor:</Text>
 
-      <div className="text-sm text-secondary">
-        {floor?.order?.priceAmount ? (
-          <div className="flex items-center gap-1">
-            {floorCurrency.imageUrl && (
-              <Image
-                src={floorCurrency.imageUrl}
-                alt={floorCurrency.symbol}
-                className="rounded-full w-4 h-4"
-              />
-            )}
-            <span>
-              {formatPrice(
-                BigInt(floor.order.priceAmount),
-                floorCurrency.decimals,
-              )}
-            </span>
-
-            <span>{floorCurrency.symbol}</span>
-          </div>
-        ) : (
-          'N/A'
-        )}
-      </div>
+      <div className="text-sm text-secondary">{floorPrice ?? '-'}</div>
     </Grid.Child>
   );
 };
