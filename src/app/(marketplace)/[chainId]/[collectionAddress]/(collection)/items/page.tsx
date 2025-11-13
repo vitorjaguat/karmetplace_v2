@@ -121,8 +121,6 @@ const CollectionPage = () => {
   //         : collectible.order,
   //   })) ?? [];
 
-  console.dir(collectiblesListMapped, { depth: null });
-
   if (errorFetchingCollectibles) {
     console.log('an error occurred while fetching collectibles', error);
 

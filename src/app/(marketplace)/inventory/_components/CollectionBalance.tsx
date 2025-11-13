@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CollectiblesGrid } from '~/components/collectablesGrid';
 import CustomNetworkImage from '~/components/custom-network-image/CustomNetworkImage';
@@ -10,15 +10,59 @@ import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import CollectionImage from '../../_landing/Card/CollectionImage';
 import { useInventory } from './InventoryContext';
 import { Divider } from '@0xsequence/design-system';
-import { compareAddress } from '@0xsequence/marketplace-sdk';
+import {
+  compareAddress,
+  MarketplaceKind,
+  type CollectibleOrder,
+  type Order,
+} from '@0xsequence/marketplace-sdk';
 import {
   useCollection,
   useInventory as useSdkInventory,
   useMarketplaceConfig,
 } from '@0xsequence/marketplace-sdk/react';
+import { useLowestListing } from '@0xsequence/marketplace-sdk/react/hooks';
 import Link from 'next/link';
 import type { Address } from 'viem';
 import { useAccount } from 'wagmi';
+
+// Helper component to fetch lowest listing for a single collectible
+const CollectibleWithLowestListing = ({
+  collectible,
+  chainId,
+  collectionAddress,
+  onListingFetched,
+}: {
+  collectible: CollectibleOrder;
+  chainId: number;
+  collectionAddress: Address;
+  onListingFetched: (tokenId: string, listing: Order | null) => void;
+}) => {
+  const { data: lowestListing, isLoading: lowestListingLoading } =
+    useLowestListing({
+      chainId,
+      collectionAddress,
+      tokenId: collectible.metadata.tokenId,
+      filter: {
+        marketplace: [MarketplaceKind.sequence_marketplace_v2],
+      },
+    });
+
+  // Update the parent when listing is fetched (or when no listing is found)
+  useMemo(() => {
+    if (!lowestListingLoading) {
+      // Set to the actual listing if found, or null if no listing from sequence marketplace
+      onListingFetched(collectible.metadata.tokenId, lowestListing || null);
+    }
+  }, [
+    lowestListing,
+    lowestListingLoading,
+    collectible.metadata.tokenId,
+    onListingFetched,
+  ]);
+
+  return null; // This component doesn't render anything
+};
 
 function CollectionHeaderSkeleton() {
   return (
@@ -44,6 +88,22 @@ const CollectionBalance = ({ collectionAddress }: CollectionBalanceProps) => {
   )?.chainId;
 
   const { setBalance } = useInventory();
+
+  // State to store lowest listings for each token (null means no listing, undefined means not fetched yet)
+  const [lowestListings, setLowestListings] = useState<
+    Record<string, Order | null>
+  >({});
+
+  // Callback to update lowest listings
+  const handleListingFetched = useCallback(
+    (tokenId: string, listing: Order | null) => {
+      setLowestListings((prev) => ({
+        ...prev,
+        [tokenId]: listing,
+      }));
+    },
+    [],
+  );
 
   const { data: collection, isLoading: collectionLoading } = useCollection({
     collectionAddress: collectionAddress,
@@ -108,8 +168,25 @@ const CollectionBalance = ({ collectionAddress }: CollectionBalanceProps) => {
 
   const isMd = useIsMinWidth('@md');
 
-  const collectiblesListMapped =
-    data?.pages.flatMap((p) => p.collectibles) ?? [];
+  const baseCollectiblesList = useMemo(
+    () => data?.pages.flatMap((p) => p.collectibles) ?? [],
+    [data],
+  );
+
+  // Map collectibles with their lowest listings from sequence marketplace only
+  const collectiblesListMapped = useMemo(() => {
+    return baseCollectiblesList.map((collectible) => {
+      const tokenId = collectible.metadata.tokenId;
+      const hasLowestListingData = tokenId in lowestListings;
+
+      return {
+        ...collectible,
+        listing: hasLowestListingData
+          ? (lowestListings[tokenId] ?? undefined)
+          : collectible.listing,
+      };
+    });
+  }, [baseCollectiblesList, lowestListings]);
 
   if (collectionLoading || collectionBalanceLoading) {
     return <CollectionHeaderSkeleton />;
@@ -121,6 +198,17 @@ const CollectionBalance = ({ collectionAddress }: CollectionBalanceProps) => {
 
   return (
     <div className="flex flex-col">
+      {/* Render invisible components to fetch lowest listings */}
+      {baseCollectiblesList.map((collectible) => (
+        <CollectibleWithLowestListing
+          key={collectible.metadata.tokenId}
+          collectible={collectible}
+          chainId={chainId}
+          collectionAddress={collectionAddress}
+          onListingFetched={handleListingFetched}
+        />
+      ))}
+
       <Divider className="w-full mb-3 mt-0" />
       <Link href={`/${chainId}/${collectionAddress}/items`}>
         <div className="mb-4">

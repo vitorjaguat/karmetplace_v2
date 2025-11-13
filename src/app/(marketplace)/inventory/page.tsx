@@ -33,7 +33,7 @@ const InventoryPageContent = () => {
   const allBalancesFetched =
     Object.values(balances).filter((balance) => balance.fetched).length ===
     config?.collections?.length;
-  console.log(balances);
+  // console.log(balances);
   useEffect(() => {
     if (!config?.collections) {
       return;
